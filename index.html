@@ -324,7 +324,6 @@
   </div>
 
   <script>
-    const openBtn = document.getElementById('openBtn');
     const buttonArea = document.getElementById('buttonArea');
     const headline = document.getElementById('headline');
     const subtext = document.getElementById('subtext');
@@ -334,18 +333,31 @@
     let isNoClicked = false;
     let loveAudio;
 
+    function createOpenButton() {
+      buttonArea.innerHTML = '';
+      const openBtn = document.createElement('button');
+      openBtn.className = 'btn btn-primary';
+      openBtn.textContent = 'Apa itu?';
+      openBtn.addEventListener('click', showQuestion);
+      buttonArea.appendChild(openBtn);
+    }
+
+    function clearLoveBanner() {
+      const existingBanner = scene.querySelector('.love-banner');
+      if (existingBanner) existingBanner.remove();
+    }
+
     function resetScene() {
       headline.textContent = 'Aku punya pertanyaan penting buat kamu...';
       subtext.textContent = 'Klik tombol di bawah untuk tahu apa yang ingin aku katakan.';
-      buttonArea.innerHTML = '<button class="btn btn-primary" id="openBtn">Apa itu?</button>';
-      const newOpenBtn = document.getElementById('openBtn');
-      newOpenBtn.addEventListener('click', showQuestion);
       scene.classList.remove('love-mode');
+      clearLoveBanner();
       isNoClicked = false;
       if (loveAudio) {
         loveAudio.stop();
         loveAudio = null;
       }
+      createOpenButton();
     }
 
     function showQuestion() {
@@ -371,6 +383,7 @@
     function rejectLove() {
       const noBtn = document.getElementById('noBtn');
       if (isNoClicked) return;
+      if (!noBtn) return;
       isNoClicked = true;
       noBtn.disabled = true;
       modal.classList.add('show');
@@ -386,7 +399,9 @@
     }
 
     function createLoveBanner() {
+      clearLoveBanner();
       const message = document.createElement('p');
+      message.className = 'love-banner';
       message.textContent = '✨ Selamat datang di dunia kita yang penuh cinta! ✨';
       message.style.marginTop = '18px';
       message.style.fontWeight = '700';
@@ -403,11 +418,13 @@
 
       loveAudio = {
         stop: () => {
-          audioCtx.close();
+          if (audioCtx.state !== 'closed') {
+            audioCtx.close();
+          }
         }
       };
 
-      notes.forEach((freq, index) => {
+      notes.forEach((freq) => {
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
         osc.type = 'sine';
@@ -421,7 +438,7 @@
       });
     }
 
-    openBtn.addEventListener('click', showQuestion);
+    createOpenButton();
     modalClose.addEventListener('click', () => {
       modal.classList.remove('show');
       setTimeout(resetScene, 250);
