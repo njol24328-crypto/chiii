@@ -39,9 +39,8 @@ body {
   box-shadow: 0 20px 60px rgba(91, 108, 133, 0.14);
   border: 1px solid rgba(255, 255, 255, 0.8);
   text-align: center;
-  transform: translateY(20px);
-  opacity: 0;
-  animation: sceneEnter 0.9s ease-out forwards;
+  transform: translateY(0);
+  opacity: 1;
 }
 
 @keyframes sceneEnter {
@@ -64,9 +63,7 @@ body {
   font-weight: 800;
   letter-spacing: -0.03em;
   margin-bottom: 18px;
-  opacity: 0;
-  transform: translateY(-10px);
-  animation: fadeDrop 0.7s ease-out 0.2s forwards;
+  opacity: 1;
 }
 
 .subtext {
@@ -74,9 +71,7 @@ body {
   line-height: 1.7;
   margin-bottom: 24px;
   color: #575767;
-  opacity: 0;
-  transform: translateY(-6px);
-  animation: fadeDrop 0.7s ease-out 0.3s forwards;
+  opacity: 1;
 }
 
 @keyframes fadeDrop {

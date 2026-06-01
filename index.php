@@ -28,7 +28,9 @@ header('Content-Type: text/html; charset=utf-8');
       />
     </div>
 
-    <div class="buttons" id="buttonArea"></div>
+    <div class="buttons" id="buttonArea">
+      <button class="btn btn-primary" data-action="open">Apa itu?</button>
+    </div>
 
     <p class="mute-note">Suara romantis akan mulai setelah kamu memilih jawaban yang manis 💕</p>
   </div>
