@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pernyataan Cinta Lucu</title>
+  <style>
+    :root {
+      --baby-blue: #cfe8ff;
+      --soft-pink: #ffd5e1;
+      --dark-pink: #ff89a3;
+      --white: #ffffff;
+      --text: #2f2f41;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #d9f0ff 0%, #ffd9eb 100%);
+      font-family: 'Poppins', sans-serif;
+      color: var(--text);
+      overflow: hidden;
+      animation: skyGlow 10s ease-in-out infinite;
+    }
+
+    @keyframes skyGlow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .scene {
+      position: relative;
+      width: min(92vw, 540px);
+      padding: 32px;
+      border-radius: 32px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 20px 60px rgba(91, 108, 133, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      text-align: center;
+      transform: translateY(20px);
+      opacity: 0;
+      animation: sceneEnter 0.9s ease-out forwards;
+    }
+
+    @keyframes sceneEnter {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .scene.love-mode {
+      background: radial-gradient(circle at top left, #fff0f7 0%, #ffd9e5 45%, rgba(255, 221, 238, 0.96) 100%);
+      box-shadow: 0 20px 80px rgba(255, 145, 169, 0.25);
+      animation: pulseBackground 3s ease-in-out infinite;
+    }
+
+    @keyframes pulseBackground {
+      0%, 100% { box-shadow: 0 20px 80px rgba(255, 145, 169, 0.25); }
+      50% { box-shadow: 0 24px 96px rgba(255, 136, 168, 0.35); }
+    }
+
+    .title {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 18px;
+      opacity: 0;
+      transform: translateY(-10px);
+      animation: fadeDrop 0.7s ease-out 0.2s forwards;
+    }
+
+    .subtext {
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 24px;
+      color: #575767;
+      opacity: 0;
+      transform: translateY(-6px);
+      animation: fadeDrop 0.7s ease-out 0.3s forwards;
+    }
+
+    @keyframes fadeDrop {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .gif-wrapper {
+      position: relative;
+      margin: 0 auto 28px;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 182, 199, 0.6);
+      background: linear-gradient(180deg, #e1f2ff 0%, #ffe3ec 100%);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(2px);
+      animation: gifGlow 4s ease-in-out infinite;
+    }
+
+    .cute-gif {
+      width: 100%;
+      display: block;
+      max-height: 280px;
+      object-fit: cover;
+      border-radius: 24px;
+      transform: scale(1);
+      animation: gifPulse 6s ease-in-out infinite;
+    }
+
+    @keyframes gifPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    @keyframes gifGlow {
+      0%, 100% { box-shadow: inset 0 0 0 1px rgba(255, 182, 199, 0.6); }
+      50% { box-shadow: inset 0 0 16px rgba(255, 182, 199, 0.18); }
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeDrop 0.7s ease-out 0.4s forwards;
+    }
+
+    .btn {
+      cursor: pointer;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 26px;
+      font-size: 1rem;
+      font-weight: 700;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+      box-shadow: 0 10px 24px rgba(85, 78, 116, 0.12);
+      position: relative;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      filter: brightness(1.02);
+    }
+
+    .btn:active {
+      transform: translateY(0) scale(0.99);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #85c7ff, #ffb8d1);
+      color: var(--white);
+      box-shadow: 0 14px 22px rgba(133, 173, 255, 0.35);
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      color: #ff618d;
+      border: 1px solid #ffd3e3;
+      box-shadow: 0 10px 22px rgba(255, 98, 147, 0.12);
+    }
+
+    .btn-danger {
+      background: #ffd6e0;
+      color: #b5436c;
+    }
+
+    .btn[disabled] {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .heart {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: radial-gradient(circle at 30% 30%, #ff8fb8 0%, #ff758c 45%, #ff3f83 100%);
+      transform: rotate(-45deg);
+      top: 50%;
+      opacity: 0;
+      animation: floatHeart 4s ease infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: inherit;
+    }
+
+    .heart::before {
+      top: -12px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 12px;
+      top: 0;
+    }
+
+    @keyframes floatHeart {
+      0% { opacity: 0; transform: translate(-50%, 0) scale(0.5) rotate(-45deg); }
+      15% { opacity: 1; }
+      50% { transform: translate(-50%, -130px) scale(1) rotate(-45deg); }
+      100% { opacity: 0; transform: translate(-50%, -220px) scale(1.1) rotate(-45deg); }
+    }
+
+    .heart:nth-child(1) { animation-delay: 0s; left: 18%; }
+    .heart:nth-child(2) { animation-delay: 0.8s; left: 78%; width: 18px; height: 18px; }
+    .heart:nth-child(3) { animation-delay: 1.4s; left: 44%; width: 20px; height: 20px; }
+    .heart:nth-child(4) { animation-delay: 2.2s; left: 62%; }
+    .heart:nth-child(5) { animation-delay: 3s; left: 36%; }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(47, 47, 65, 0.35);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-card {
+      width: min(92vw, 380px);
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 26px;
+      text-align: center;
+      box-shadow: 0 22px 60px rgba(60, 55, 90, 0.16);
+      transform: scale(0.95);
+      opacity: 0;
+      animation: popIn 0.25s ease-out forwards;
+    }
+
+    .modal.show .modal-card {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    @keyframes popIn {
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-card p {
+      margin-bottom: 22px;
+      font-size: 1rem;
+      color: #4d4d66;
+    }
+
+    .modal-close {
+      background: #ffbfd0;
+      color: #7b2a45;
+      padding: 12px 24px;
+      border-radius: 999px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .modal-close:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(255, 112, 148, 0.22);
+    }
+
+    .mute-note {
+      margin-top: 18px;
+      font-size: 0.88rem;
+      color: #6b6b83;
+      opacity: 0;
+      animation: fadeDrop 0.7s ease-out 0.5s forwards;
+    }
+  </style>
+</head>
+<body>
+  <div class="scene" id="scene">
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+
+    <h1 class="title" id="headline">Aku punya pertanyaan penting buat kamu...</h1>
+    <p class="subtext" id="subtext">Klik tombol di bawah untuk tahu apa yang ingin aku katakan.</p>
+
+    <div class="gif-wrapper">
+      <img
+        class="cute-gif"
+        src="https://media.giphy.com/media/jUwpNzg9IcyrK/giphy.gif"
+        alt="GIF kucing lofi lucu sedang memohon"
+      />
+    </div>
+
+    <div class="buttons" id="buttonArea">
+      <button class="btn btn-primary" id="openBtn">Apa itu?</button>
+    </div>
+
+    <p class="mute-note">Suara romantis akan mulai setelah kamu memilih jawaban yang manis 💕</p>
+  </div>
+
+  <div class="modal" id="modal">
+    <div class="modal-card">
+      <p>Yakin? Coba pikir-pikir lagi... 🥺</p>
+      <button class="modal-close" id="modalClose">Baiklah...</button>
+    </div>
+  </div>
+
+  <script>
+    const openBtn = document.getElementById('openBtn');
+    const buttonArea = document.getElementById('buttonArea');
+    const headline = document.getElementById('headline');
+    const subtext = document.getElementById('subtext');
+    const scene = document.getElementById('scene');
+    const modal = document.getElementById('modal');
+    const modalClose = document.getElementById('modalClose');
+    let isNoClicked = false;
+    let loveAudio;
+
+    function resetScene() {
+      headline.textContent = 'Aku punya pertanyaan penting buat kamu...';
+      subtext.textContent = 'Klik tombol di bawah untuk tahu apa yang ingin aku katakan.';
+      buttonArea.innerHTML = '<button class="btn btn-primary" id="openBtn">Apa itu?</button>';
+      const newOpenBtn = document.getElementById('openBtn');
+      newOpenBtn.addEventListener('click', showQuestion);
+      scene.classList.remove('love-mode');
+      isNoClicked = false;
+      if (loveAudio) {
+        loveAudio.stop();
+        loveAudio = null;
+      }
+    }
+
+    function showQuestion() {
+      headline.textContent = 'Kamu mau gak jadi pacar aku?';
+      subtext.textContent = 'Kalau kamu mau, aku janji bakal selalu lucu dan sayang terus.';
+      buttonArea.innerHTML = '';
+
+      const yesBtn = document.createElement('button');
+      yesBtn.className = 'btn btn-primary';
+      yesBtn.textContent = 'Mau Banget! 🧸';
+      yesBtn.addEventListener('click', acceptLove);
+
+      const noBtn = document.createElement('button');
+      noBtn.className = 'btn btn-secondary';
+      noBtn.textContent = 'Enggak 🥺';
+      noBtn.id = 'noBtn';
+      noBtn.addEventListener('click', rejectLove);
+
+      buttonArea.appendChild(yesBtn);
+      buttonArea.appendChild(noBtn);
+    }
+
+    function rejectLove() {
+      const noBtn = document.getElementById('noBtn');
+      if (isNoClicked) return;
+      isNoClicked = true;
+      noBtn.disabled = true;
+      modal.classList.add('show');
+    }
+
+    function acceptLove() {
+      headline.textContent = 'Yay! Aku bahagia banget kamu mau! 💖';
+      subtext.textContent = 'Kamu sudah membuat hari aku jadi sempurna.';
+      buttonArea.innerHTML = '';
+      scene.classList.add('love-mode');
+      createLoveBanner();
+      playRomanticMelody();
+    }
+
+    function createLoveBanner() {
+      const message = document.createElement('p');
+      message.textContent = '✨ Selamat datang di dunia kita yang penuh cinta! ✨';
+      message.style.marginTop = '18px';
+      message.style.fontWeight = '700';
+      message.style.color = '#c72f7f';
+      subtext.after(message);
+    }
+
+    function playRomanticMelody() {
+      if (!window.AudioContext && !window.webkitAudioContext) return;
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      const audioCtx = new AudioContext();
+      const notes = [261.63, 311.13, 349.23, 392.00, 440.00, 523.25];
+      let time = audioCtx.currentTime;
+
+      loveAudio = {
+        stop: () => {
+          audioCtx.close();
+        }
+      };
+
+      notes.forEach((freq, index) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        gain.gain.value = 0.05;
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(time);
+        osc.stop(time + 0.45);
+        time += 0.45;
+      });
+    }
+
+    openBtn.addEventListener('click', showQuestion);
+    modalClose.addEventListener('click', () => {
+      modal.classList.remove('show');
+      setTimeout(resetScene, 250);
+    });
+  </script>
+</body>
+</html>
