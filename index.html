@@ -127,8 +127,11 @@
       flex-wrap: wrap;
       gap: 14px;
       justify-content: center;
-      opacity: 0;
-      animation: fadeDrop 0.7s ease-out 0.4s forwards;
+      opacity: 1;
+    }
+
+    .buttons.fade-in {
+      animation: fadeDrop 0.7s ease-out 0.2s forwards;
     }
 
     .btn {
@@ -338,7 +341,7 @@
       const openBtn = document.createElement('button');
       openBtn.className = 'btn btn-primary';
       openBtn.textContent = 'Apa itu?';
-      openBtn.addEventListener('click', showQuestion);
+      openBtn.dataset.action = 'open';
       buttonArea.appendChild(openBtn);
     }
 
@@ -368,16 +371,17 @@
       const yesBtn = document.createElement('button');
       yesBtn.className = 'btn btn-primary';
       yesBtn.textContent = 'Mau Banget! 🧸';
-      yesBtn.addEventListener('click', acceptLove);
+      yesBtn.dataset.action = 'yes';
 
       const noBtn = document.createElement('button');
       noBtn.className = 'btn btn-secondary';
       noBtn.textContent = 'Enggak 🥺';
+      noBtn.dataset.action = 'no';
       noBtn.id = 'noBtn';
-      noBtn.addEventListener('click', rejectLove);
 
       buttonArea.appendChild(yesBtn);
       buttonArea.appendChild(noBtn);
+      buttonArea.classList.add('fade-in');
     }
 
     function rejectLove() {
@@ -438,11 +442,20 @@
       });
     }
 
-    createOpenButton();
+    buttonArea.addEventListener('click', (event) => {
+      const action = event.target.dataset.action;
+      if (!action) return;
+      if (action === 'open') showQuestion();
+      if (action === 'yes') acceptLove();
+      if (action === 'no') rejectLove();
+    });
+
     modalClose.addEventListener('click', () => {
       modal.classList.remove('show');
       setTimeout(resetScene, 250);
     });
+
+    resetScene();
   </script>
 </body>
 </html>
